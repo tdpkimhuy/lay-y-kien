@@ -8,12 +8,12 @@
   "description": "Hệ thống quản lý dân cư",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/1040/1040226.png",
+      "src": "https://ktcnhy.github.io/kimhuy/logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/1040/1040226.png",
+      "src": "https://ktcnhy.github.io/kimhuy/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }
