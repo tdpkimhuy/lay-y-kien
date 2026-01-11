@@ -4,46 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TDP Kim Huy</title>
-    
     <link rel="manifest" href="manifest.json">
-    
-    <link rel="apple-touch-icon" href="https://ktcnhy.github.io/kimhuy/logo.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
     <style>
-        /* CSS để Iframe full màn hình không viền */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Chặn scroll của trang mẹ */
-            background-color: #ffffff;
-        }
-        iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-        /* Loading spinner khi iframe chưa tải xong */
-        #loader {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: white; font-family: sans-serif; font-weight: bold;
-        }
+        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#ffffff; }
+        iframe { border:none; width:100%; height:100%; display:block; opacity:0; transition:opacity 0.5s; }
+        #loader { position:fixed; top:0; left:0; width:100%; height:100%; background:#ffffff TYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TDP Kim Huy</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#ffffff; }
+        iframe { border:none; width:100%; height:100%; display:block; opacity:0; transition:opacity 0.5s; }
+        #loader { position:fixed; top:0; left:0; width:100%; height:100%; background:#ffffff; color:white; display:flex; justify-content:center; align-items:center; z-index:99; }
     </style>
 </head>
 <body>
-
-    <div id="loader">Đang tải hệ thống...</div>
-
-    <iframe src="https://script.google.com/macros/s/AKfycbzBY_xz1g-1PgI4vPOalADoBDmJpg5DDAWn2j621wh6Srrb_uMFPrIxFu_BszFyzG40/exec" onload="document.getElementById('loader').style.display='none'"></iframe>
+    <div id="loader">Đang kết nối...</div>
+    <iframe id="main-frame"></iframe>
 
     <script>
+        // === CẤU HÌNH 2 LINK CỦA BẠN VÀO ĐÂY ===
+        const LINKS = {
+            // Link 1 (Exec as Me): Dùng cho Iframe
+            app: "https://script.google.com/macros/s/AKfycbynsozYAOm-fFBTC99u3SVdGxB9e5N47ANQKtvxEIuTv7GEKrQyRyWVokOh8tNw2E4w/exec",
+            
+            // Link 2 (Exec as User): Dùng để Admin mở trực tiếp
+            google: "https://script.google.com/macros/s/AKfycbzBY_xz1g-1PgI4vPOalADoBDmJpg5DDAWn2j621wh6Srrb_uMFPrIxFu_BszFyzG40/exec"
+        };
+
+        function init() {
+            const params = new URLSearchParams(window.location.search);
+            const mode = params.get('mode'); // ?mode=google
+            
+            if (mode === 'google') {
+                // Chuyển hướng sang giao diện Native của Google
+                window.location.href = LINKS.google;
+            } else {
+                // Mặc định: Load Iframe App
+                const iframe = document.getElementById('main-frame');
+                iframe.src = LINKS.app;
+                iframe.onload = function() {
+                    document.getElementById('loader').style.display = 'none';
+                    iframe.style.opacity = '1';
+                }
+            }
+        }
+        
+        init();
+
+        // Đăng ký PWA
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-            .then(() => console.log('Service Worker Registered'))
-            .catch(err => console.log('SW Fail:', err));
+            navigator.serviceWorker.register('./sw.js');
         }
     </script>
 </body>
