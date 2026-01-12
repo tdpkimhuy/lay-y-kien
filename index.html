@@ -38,7 +38,7 @@
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            /* QUAN TRỌNG: Mặc định ẩn đi để không bị nháy khi load chế độ thường */
+            /* Mặc định ẩn để tránh nháy khi load mode thường */
             display: none; 
             justify-content: center; align-items: center;
             z-index: 100; transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
@@ -81,7 +81,7 @@
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* LOGO */
+        /* LOGO STYLE MỚI */
         .logo-container {
             position: relative; margin: 0 auto 25px;
             width: 90px; height: 90px;
@@ -89,16 +89,27 @@
         .logo-box {
             width: 100%; height: 100%; 
             background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
-            color: white;
             border-radius: 24px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 42px;
             box-shadow: 0 10px 20px rgba(78, 84, 200, 0.3);
-            transform: rotate(-5deg);
+            transform: rotate(-5deg); /* Nghiêng nhẹ tạo kiểu */
+            overflow: hidden; /* Cắt ảnh nếu tràn */
         }
+        
+        /* CSS cho ảnh Logo */
+        .logo-img {
+            width: 85%; /* Thu nhỏ một chút để lộ nền gradient đẹp */
+            height: 85%;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            /* Nếu muốn ảnh không bị nghiêng theo hộp thì bỏ comment dòng dưới */
+            /* transform: rotate(5deg); */ 
+        }
+
         .logo-dot {
             position: absolute; top: -5px; right: -5px; width: 20px; height: 20px;
             background: #ff6b6b; border-radius: 50%; border: 3px solid white;
+            z-index: 2;
         }
 
         h3.app-title {
@@ -177,7 +188,7 @@
         <div class="welcome-card">
             <div class="logo-container">
                 <div class="logo-box">
-                    <i class="bi bi-buildings-fill"></i>
+                    <img src="https://ktcnhy.github.io/kimhuy/logo.png" alt="Logo Kim Huy" class="logo-img">
                 </div>
                 <div class="logo-dot"></div>
             </div>
@@ -190,8 +201,8 @@
                     <div class="d-flex align-items-center">
                         <div class="btn-icon"><i class="bi bi-person-badge-fill"></i></div>
                         <div>
-                            <div class="btn-text-main">Cư Dân</div>
-                            <div class="btn-text-sub">Tra cứu phí, tin tức, thông báo</div>
+                            <div class="btn-text-main">Người dân</div>
+                            <div class="btn-text-sub">Xem tin tức, thông báo, gửi góp </div>
                         </div>
                     </div>
                     <i class="bi bi-chevron-right text-muted small"></i>
@@ -228,8 +239,8 @@
         // CẤU HÌNH LIÊN KẾT
         // ==========================================
         const LINKS = {
-            app: "https://script.google.com/macros/s/AKfycbxYRu5WmrtVatFCKtKNgcMQAjR2VlBSprHbqdb5qVuHoDGlMbo9T9r7uWlcIxCiqSllZw/exec",
-            admin: "https://script.google.com/macros/s/AKfycbzH-Q-FF2dFg35tBmu0Kp1Fg_vFccIim8zoboHxf-5dXKnPCbtkkM1phaYg-ZltrU2NpQ/exec"
+            app: "https://script.google.com/macros/s/AKfycbynsozYAOm-fFBTC99u3SVdGxB9e5N47ANQKtvxEIuTv7GEKrQyRyWVokOh8tNw2E4w/exec",
+            admin: "https://script.google.com/macros/s/AKfycbzBY_xz1g-1PgI4vPOalADoBDmJpg5DDAWn2j621wh6Srrb_uMFPrIxFu_BszFyzG40/exec"
         };
 
         // Hàm lấy tham số URL
