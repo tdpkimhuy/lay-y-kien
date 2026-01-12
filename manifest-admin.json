@@ -1,0 +1,7 @@
+{
+  "name": "Kim Huy Admin",
+  "short_name": "KH Admin",
+  "start_url": "./index.html?m=admin", 
+  "icons": [ ... (có thể đổi icon màu khác để dễ phân biệt) ... ]
+  // Các phần khác giữ nguyên
+}
